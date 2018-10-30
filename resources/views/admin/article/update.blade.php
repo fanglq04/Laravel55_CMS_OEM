@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-             创建文章
+             修改文章
             <small>Description...</small>
         </h1>
     </section>
@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">标题</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="title" value="" autofocus>
+                                <input type="text" class="form-control" name="title" value="{{$article->title}}" autofocus>
                             </div>
                         </div>
                         <div class="form-group">
@@ -25,7 +25,7 @@
                                 <select id="category" class="form-control" name="category_id">
                                     <option value="0">--选择分类--</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">
+                                        <option value="{{$category->id}}" @if($article->category_id == $category->id) selected @endif>
                                             @for($i=0;$i<$category->depth;$i++)
                                                 &nbsp;&nbsp;&nbsp;&nbsp;|-
                                             @endfor
@@ -38,7 +38,13 @@
                         <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">来源</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="source" value="" autofocus>
+                                <input type="text" class="form-control" name="source" value="{{$article->title}}" autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag" class="col-md-2 control-label">当前图片</label>
+                            <div class="col-md-8">
+                                <img src="{{env('APP_URL')}} {{public_path()}} {{$article->thumb}}" width="120px" height="120px">
                             </div>
                         </div>
                         <div class="form-group">
@@ -51,17 +57,17 @@
                             <label for="tag" class="col-md-2 control-label">是否置顶</label>
                             <div class="col-md-8">
                                <label class="radio-inline">
-                                  <input type="radio" name="is_top" id="inlineRadio1" value="1"> 是
+                                  <input type="radio" name="is_top" id="inlineRadio1" value="1" @if($article->is_top == 1) checked @endif> 是
                                 </label>
                                 <label class="radio-inline">
-                                  <input type="radio" name="is_top" id="inlineRadio2" value="0"> 否
+                                  <input type="radio" name="is_top" id="inlineRadio2" value="0" @if($article->is_top == 0) checked @endif> 否
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">商品详情</label>
                             <div class="col-md-8">
-                                <script id="container" name="content" type="text/plain"></script>
+                                <script id="container" name="content" type="text/plain">{!! $article->content !!}</script>
                             </div>
                         </div>
                         <div class="form-group">

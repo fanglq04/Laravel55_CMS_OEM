@@ -45,9 +45,19 @@ class ArticleController extends Controller
         return view('admin.article.create', compact('categories'));
     }
 
-    public function update()
+    /**
+     * @desc 文章更新
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author Jiafang.wang
+     * @since 2018/10/30 14:23
+     */
+    public function update(Request $request)
     {
-
+        $article_id = $request->input('article_id');
+        $article = Article::find($article_id);
+        $categories = Category::where('status', 1)->orderBy('lft', 'asc')->get();
+        return view('admin.article.update', compact('article', 'categories'));
     }
 
     /**

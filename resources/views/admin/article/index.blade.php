@@ -43,9 +43,7 @@
                                     <input type="text" name="sort" value="{{$article->sort}}">
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-xs" href="#">详情</a>
-                                    <a class="btn btn-primary btn-xs" href="#">禁用</a>
-                                    <a class="btn btn-primary btn-xs" href="#">显示</a>
+                                    <a class="btn btn-primary btn-xs" href="{{route('admin.article.update')}}?article_id={{$article->id}}">详情</a>
                                 </td>
                             </tr>
                             @endforeach
