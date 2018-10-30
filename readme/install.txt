@@ -1,0 +1,5 @@
+数据库安装后，执行以下sql语句
+
+INSERT INTO `admin_permissions` VALUES (23, '栏目与文章', 4, 'admin.category.index', 1, 'fa-th-list', NULL, '2018-10-30 02:58:05', '2018-10-30 02:58:05');
+INSERT INTO `admin_permissions` VALUES (24, '栏目管理', 1, 'admin.category.index', 1, 'fa-suitcase', 23, '2018-10-30 02:58:24', '2018-10-30 02:58:24');
+INSERT INTO `admin_permissions` VALUES (25, '文章管理', 2, 'admin.article.index', 1, 'fa-shopping-bag', 23, '2018-10-30 02:58:49', '2018-10-30 02:58:49');

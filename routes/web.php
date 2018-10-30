@@ -37,6 +37,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=>'admin'
     Route::group(['prefix' => 'article'],function () {
         //列表
         Route::get('index', 'ArticleController@index')->name('admin.article.index');
+
+        Route::get('create', 'ArticleController@create')->name('admin.article.create');
+        Route::post('store', 'ArticleController@store')->name('admin.article.store');
+
     });
 
 });

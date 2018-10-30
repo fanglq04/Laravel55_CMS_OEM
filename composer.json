@@ -9,9 +9,9 @@
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-	"stevenyangecho/laravel-u-editor": "^1.4",
+        "stevenyangecho/laravel-u-editor": "^1.4",
         "yuanchang/xadmin": "^1.0",
-	"baum/baum": "^1.1",
+        "baum/baum": "^1.1",
         "doctrine/dbal": "^2.8"
     },
     "require-dev": {

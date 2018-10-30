@@ -176,10 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-		\Admin\Providers\AdminServiceProvider::class,
-		Stevenyangecho\UEditor\UEditorServiceProvider::class,
-		Baum\Providers\BaumServiceProvider::class,
-
+        \Admin\Providers\AdminServiceProvider::class,
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
     ],
 
     /*

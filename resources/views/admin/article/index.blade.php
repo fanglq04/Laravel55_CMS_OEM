@@ -9,6 +9,9 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
+                <a href="{{route('admin.article.create')}}" class="btn btn-danger">添加文章</a>
+            </div>
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
                         <table class="table table-bordered" style="font-size: 12px">
