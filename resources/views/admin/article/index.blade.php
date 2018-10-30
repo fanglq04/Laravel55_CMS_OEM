@@ -27,6 +27,7 @@
                                 <th width="20%">#</th>
                             </tr>
                             @foreach($articles as $article)
+                            <tr>
                                 <td>{{$article->id}}</td>
                                 <td>{{$article->title}}</td>
                                 <td>{{$article->categoryInfo->name}}</td>
@@ -40,10 +41,15 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <input type="text" name="sort" value="{{$article->sort}}">
+                                    <input type="text" name="sort" value="{{$article->sort}}" />
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-xs" href="{{route('admin.article.update')}}?article_id={{$article->id}}">详情</a>
+                                    @if($article->status)
+                                        <a class="btn btn-danger btn-xs" href="javascript:change_status('{{$article->id}}', '0')">禁用</a>
+                                    @else
+                                        <a class="btn btn-success btn-xs" href="javascript:change_status('{{$article->id}}', '1')">显示</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -57,5 +63,23 @@
 @endsection
 @push('js')
     <script>
+        function change_status(article_id, to_status) {
+            if (!article_id || !to_status) {
+                toastr.error('缺少参数');
+                return false;
+            }
+            $.get(
+                "{{route('admin.article.change.status')}}",
+                {'article_id': article_id, 'to_status': to_status},
+                function (response) {
+                    if (response.status) {
+                        toastr.success(response.message);
+                        setTimeout("window.location.reload()", 2000);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            )
+        }
     </script>
 @endpush

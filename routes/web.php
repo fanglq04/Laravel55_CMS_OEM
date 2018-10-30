@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=>'admin'
         Route::get('create', 'ArticleController@create')->name('admin.article.create');
         Route::post('store', 'ArticleController@store')->name('admin.article.store');
         Route::get('update', 'ArticleController@update')->name('admin.article.update');
+        Route::get('change/status', 'ArticleController@changeStatus')->name('admin.article.change.status');
     });
 
 });

@@ -104,4 +104,35 @@ class ArticleController extends Controller
         }
     }
 
+    /**
+     * @desc 更新状态
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author Jiafang.wang
+     * @since 2018/10/30 17:13
+     */
+    public function changeStatus(Request $request) {
+        try {
+            $article_id = $request->input('article_id');
+            $to_status = $request->input('to_status');
+            if (!$article_id || $to_status) {
+                throw new Exception('缺少参数');
+            }
+            Article::where('id', $article_id)->update([
+                'status' => $to_status,
+            ]);
+            return response()->json([
+                'status' => 1,
+                'message' => '操作成功'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 0,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+
+
+    }
 }
