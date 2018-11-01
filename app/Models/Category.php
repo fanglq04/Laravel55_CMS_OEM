@@ -17,6 +17,6 @@ class Category extends Node
 {
     protected $table = 'category';
     protected $fillable = [
-        'parent_id', 'name', 'lft', 'rgt', 'depth', 'status',
+        'parent_id', 'name', 'lft', 'rgt', 'depth', 'list_template', 'detail_template', 'status',
     ];
 }

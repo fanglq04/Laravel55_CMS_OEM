@@ -43,6 +43,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-xs" href="{{route('admin.category.update', array('id' => $category->id))}}">编辑</a>
+                                    <a class="btn btn-primary btn-xs" href="#" target="_blank">查看</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use Illuminate\Support\Facades\Input;
 use Mockery\Exception;
 use App\Models\Article;
 use App\Models\Category;
@@ -86,12 +87,33 @@ class ArticleController extends Controller
             if ($validator->fails()) {
                 throw new Exception($validator->errors()->first());
             }
+            $file = $request->file('thumb');
+            if ($file && $file->isValid()){
+                $url_path = 'uploads';
+                $rule = ['jpg', 'png', 'gif'];
+                $clientName = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                if (!in_array($extension, $rule)) {
+                    throw new Exception ('图片格式为jpg,png,gif');
+                }
+                $newName = md5(date("Y-m-d H:i:s") . $clientName) . "." . $extension;
+                $file->move($url_path, $newName);
+                $namePath = $url_path . '/' . $newName;
+                $inputs['thumb'] = $namePath;
+            }
+
             DB::beginTransaction();
-            if (isset($inputs['goods_id'])) {
+            if (isset($inputs['article_id'])) {
                 $article = Article::find($inputs['article_id']);
                 $article->title = $inputs['title'];
+                $article->description = $inputs['description'];
+                $article->source = $inputs['source'];
                 $article->category_id = $inputs['category_id'];
                 $article->content = $inputs['content'];
+                if ($inputs['thumb']) {
+                    unlink( public_path() . '\\' . $article->thumb);
+                    $article->thumb = $inputs['thumb'];
+                }
                 $article->save();
             } else {    //创建
                 Article::create($inputs);
@@ -115,7 +137,7 @@ class ArticleController extends Controller
         try {
             $article_id = $request->input('article_id');
             $to_status = $request->input('to_status');
-            if (!$article_id || $to_status) {
+            if (!$article_id || !$to_status) {
                 throw new Exception('缺少参数');
             }
             Article::where('id', $article_id)->update([
@@ -131,8 +153,34 @@ class ArticleController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
 
-
-
+    /**
+     * @desc 排序
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author Jiafang.Wang（270491194@qq.com）
+     * @since 2018\11\1 0001 16:03
+     */
+    public function changeSort(Request $request) {
+        try {
+            $article_id = $request->input('article_id');
+            $sort = $request->input('sort');
+            if (!$article_id || !$sort) {
+                throw new Exception('缺少参数');
+            }
+            Article::where('id', $article_id)->update([
+                'sort' => $sort,
+            ]);
+            return response()->json([
+                'status' => 1,
+                'message' => '操作成功'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 0,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

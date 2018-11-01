@@ -17,12 +17,6 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.category.store') }}" onsubmit="return check_submit()">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <label for="tag" class="col-md-3 control-label">分类名称</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="name" id="add_category_name">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label for="pid" class="col-md-3 control-label">所属分类</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="parent_id">
@@ -39,10 +33,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="tag" class="col-md-3 control-label">分类名称</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="name" id="add_category_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="status" class="col-md-3 control-label">是否显示</label>
                                 <div class="col-md-6">
-                                    <input type="radio"  name="status" value="1" checked>是
-                                    <input type="radio"  name="status"  value="0">否
+                                    <input type="radio" name="status" value="1" checked>是
+                                    <input type="radio" name="status" value="0">否
                                 </div>
                             </div>
                             <div class="form-group">

@@ -17,7 +17,7 @@ class Article extends Model
 {
     protected $table = 'articles';
     protected $fillable = [
-       'category_id', 'title', 'source', 'thumb', 'content', 'status', 'is_top', 'sort'
+       'category_id', 'title', 'description', 'source', 'thumb', 'content', 'status', 'is_top', 'sort'
     ];
 
     /**

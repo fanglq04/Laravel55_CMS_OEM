@@ -13,10 +13,17 @@
                 <div class="row">
                     <form class="form-horizontal" role="form" method="POST" action="{{route('admin.article.store')}}" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="article_id" value="{{$article->id}}">
                         <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">标题</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" name="title" value="{{$article->title}}" autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tag" class="col-md-2 control-label">描述</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="description">{{$article->title}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,7 +51,7 @@
                         <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">当前图片</label>
                             <div class="col-md-8">
-                                <img src="{{env('APP_URL')}} {{public_path()}} {{$article->thumb}}" width="120px" height="120px">
+                                <img src="{{env('APP_URL')}}{{$article->thumb}}" width="120px" height="120px">
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,7 +81,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <button type="submit" class="btn btn-primary btn-md btn-block">
                                     <i class="fa fa-plus-circle"></i>
-                                    添加
+                                    保存
                                 </button>
                             </div>
                         </div>

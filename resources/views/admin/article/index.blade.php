@@ -31,7 +31,7 @@
                                 <td>{{$article->id}}</td>
                                 <td>{{$article->title}}</td>
                                 <td>{{$article->categoryInfo->name}}</td>
-                                <td><img src="{{public_path()}}{{$article->thumb}}" width="70px" height="70px"></td>
+                                <td><img src="{{env('APP_URL')}}{{$article->thumb}}" width="70px" height="70px"></td>
                                 <td>{{$article->source}}</td>
                                 <td>
                                     @if($article->status == 1)
@@ -41,7 +41,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <input type="text" name="sort" value="{{$article->sort}}" />
+                                    @if($article->is_ttop) 是 @else 否 @endif
+                                </td>
+                                <td>
+                                    <input type="text" article="{{$article->id}}"  name="sort" value="{{$article->sort}}" />
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-xs" href="{{route('admin.article.update')}}?article_id={{$article->id}}">详情</a>
@@ -81,5 +84,25 @@
                 }
             )
         }
+        $("input[name='sort']").blur(function () {
+            var sort = $(this).val();
+            var article = $(this).attr('article');
+            if (!sort || !article) {
+                toastr.error('缺少参数');
+                return false;
+            }
+            $.get(
+                "{{route('admin.article.change.sort')}}",
+                {'article_id': article, 'sort': sort},
+                function (response) {
+                    if (response.status) {
+                        toastr.success(response.message);
+                        setTimeout("window.location.reload()", 2000);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            )
+        })
     </script>
 @endpush

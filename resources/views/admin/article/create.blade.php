@@ -20,6 +20,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="tag" class="col-md-2 control-label">描述</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="tag" class="col-md-2 control-label">所属分类</label>
                             <div class="col-md-8">
                                 <select id="category" class="form-control" name="category_id">

@@ -80,7 +80,9 @@ class CategoryController extends Controller
                 $root = Category::find($parent_id);
                 $root->children()->create(['name' => $name]);
             } else {
-                Category::create(['name' => $name]);
+                Category::create([
+                    'name' => $name
+                ]);
             }
         }
         return redirect()->route('admin.category.index');

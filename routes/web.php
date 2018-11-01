@@ -12,14 +12,25 @@
 */
 
 
-Route::get('/', 'IndexController@index')->name('index');
 Auth::routes();
 
-//前台
+//-----------------前台-----------------
+Route::get('/', 'IndexController@index')->name('index');
+Route::get('/index.html', 'IndexController@index')->name('index');
+Route::get('/about.html', 'IndexController@about')->name('about');
+Route::get('/services.html', 'IndexController@services')->name('services');
+Route::get('/portfolio.html', 'IndexController@portfolio')->name('portfolio');
+Route::get('/contact.html', 'IndexController@contact')->name('contact');
+Route::get('/news.html', 'IndexController@news')->name('news');
 
 
 
-//后台
+
+
+
+
+
+//-----------------后台-----------------
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=>'admin'],function () {
     //商品分类
     Route::group(['prefix' => 'category'],function () {
@@ -41,6 +52,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=>'admin'
         Route::post('store', 'ArticleController@store')->name('admin.article.store');
         Route::get('update', 'ArticleController@update')->name('admin.article.update');
         Route::get('change/status', 'ArticleController@changeStatus')->name('admin.article.change.status');
+        Route::get('change/sort', 'ArticleController@changeSort')->name('admin.article.change.sort');
     });
 
 });
